@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.kashp.projectmanagement.dao.EmployeeRepository;
 import pl.kashp.projectmanagement.entities.Employee;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -31,5 +33,12 @@ public class EmployeeController {
     public String createEmployee(Model model, Employee employee){
         emploRepo.save(employee);
         return "redirect:/employee/new";
+    }
+
+    @GetMapping("/list")
+    public String displayEmployeeList(Model model){
+        List<Employee> employees = emploRepo.findAll();
+        model.addAttribute("employees", employees);
+        return "/employees/employee-list";
     }
 }

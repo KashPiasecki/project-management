@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.kashp.projectmanagement.dao.ProjectRepository;
 import pl.kashp.projectmanagement.entities.Project;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/projects")
 public class ProjectController {
@@ -32,5 +34,12 @@ public class ProjectController {
         proRepo.save(project);
         //use a redirect to prevent duplicate submissions
         return "redirect:/projects/new";
+    }
+
+    @GetMapping("/list")
+    public String displayProjectList(Model model){
+        List<Project> projects = proRepo.findAll();
+        model.addAttribute("projects", projects);
+        return "/projects/project-list";
     }
 }

@@ -3,23 +3,11 @@
 <head th:replace="layouts :: head"></head>
 <body>
 <nav th:replace="layouts:: navbar"></nav>
-<div>
-    <h4>Current projects</h4>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th> Project Name</th>
-            <th> Project Stage</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="aProject:${projects}">
-            <td th:text="${aProject.name}"></td>
-            <td th:text="${aProject.stage}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <h4>Current employees</h4>
+<div class="container">
+    <h4>Employees Directory</h4>
+    <hr>
+<!--    Add New Employee Button-->
+    <a th:href="@{/employee/new}" class="btn btn-primary btn-sm mb-3">New Employee</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
