@@ -1,14 +1,8 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>Document</title>
-</head>
+<head th:replace="layouts :: head"></head>
+<body>
+<nav th:replace="layouts:: navbar"></nav>
 <body>
     <div class="container">
         <form action="save" th:object="${project}" method="post">
@@ -16,7 +10,7 @@
             <select th:field="${project.stage}">
                 <option th:value="NOTSTARTED">Not Started</option>
                 <option th:value="INPROGRESS">In Progress</option>
-                <option th:value="COMPLETES">Completed</option>
+                <option th:value="COMPLETED">Completed</option>
             </select>
             <textarea th:type="text" placeholder="Description" th:field="${project.description}"></textarea>
             <button type="submit">Create Project</button>
