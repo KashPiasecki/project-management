@@ -1,6 +1,7 @@
 package pl.kashp.projectmanagement.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
@@ -13,10 +14,14 @@ public class Employee {
     private String lastName;
     private String email;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
                 fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @JoinTable(
+            name = "Employee_Project",
+            joinColumns = { @JoinColumn(name = "employee_id") },
+            inverseJoinColumns = { @JoinColumn(name = "project_id") }
+    )
+    private List<Project> project;
 
 
     public Employee() {
@@ -32,11 +37,11 @@ public class Employee {
         return employeeId;
     }
 
-    public Project getProject() {
+    public List<Project> getProject() {
         return project;
     }
 
-    public void setProject(Project project) {
+    public void setProject(List<Project> project) {
         this.project = project;
     }
 
