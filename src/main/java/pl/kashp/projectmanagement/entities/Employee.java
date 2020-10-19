@@ -7,7 +7,7 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long employeeId;
 
     private String firstName;
@@ -17,7 +17,7 @@ public class Employee {
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
                 fetch = FetchType.LAZY)
     @JoinTable(
-            name = "Employee_Project",
+            name = "Project_Employee",
             joinColumns = { @JoinColumn(name = "employee_id") },
             inverseJoinColumns = { @JoinColumn(name = "project_id") }
     )
