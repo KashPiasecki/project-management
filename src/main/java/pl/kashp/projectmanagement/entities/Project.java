@@ -2,6 +2,7 @@ package pl.kashp.projectmanagement.entities;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,12 @@ public class Project {
     private List<Employee> employees;
 
     public Project() {
+    }
+
+    public Project(String name, String stage, String description) {
+        this.name = name;
+        this.stage = stage;
+        this.description = description;
     }
 
     public Project(String name, String stage, String description, List<Employee> employees) {
@@ -67,5 +74,12 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addEmployee(Employee emp1) {
+        if (employees==null){
+            employees = new ArrayList<>();
+        }
+        employees.add(emp1);
     }
 }
