@@ -1,7 +1,7 @@
 package pl.kashp.projectmanagement.logging;
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
@@ -21,13 +21,26 @@ public class ApplicationLoggerAspect {
         //empty method just to name the location specified in the pointcut
     }
 
-    @After("definePackagePointcuts()")
-    public void log(JoinPoint jp){
+    @Around("definePackagePointcuts()")
+    public Object log(ProceedingJoinPoint jp){
         log.debug("\n\n\n");
         log.debug("********* Before Method Execution ********* \n {}.{}() with arguments[s] = {}",
                 jp.getSignature().getDeclaringTypeName(),
                 jp.getSignature().getName(), Arrays.toString(jp.getArgs()));
         log.debug("___________________________________________________________ \n\n\n");
+
+        Object proceed = null;
+        try {
+            proceed = jp.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+
+        log.debug("********* After Method Execution ********* \n {}.{}() with arguments[s] = {}",
+                jp.getSignature().getDeclaringTypeName(),
+                jp.getSignature().getName(), Arrays.toString(jp.getArgs()));
+        log.debug("___________________________________________________________ \n\n\n");
+        return proceed;
     }
 
 }
