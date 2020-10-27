@@ -2,11 +2,13 @@ package pl.kashp.projectmanagement.dao;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import pl.kashp.projectmanagement.dto.EmployeeProject;
 import pl.kashp.projectmanagement.entities.Employee;
 
 import java.util.List;
 
+@Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     @Override
