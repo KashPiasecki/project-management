@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Aspect
 @Component
 public class ApplicationLoggerAspect {
@@ -21,12 +23,11 @@ public class ApplicationLoggerAspect {
 
     @After("definePackagePointcuts()")
     public void log(JoinPoint jp){
-        log.trace("A TRACE Message");
-        log.debug("A DEBUG Message");
-        log.info("An INFO Message");
-        log.warn("A WARN Message");
-        log.error("An ERROR Message");
-
+        log.debug("\n\n\n");
+        log.debug("********* Before Method Execution ********* \n {}.{}() with arguments[s] = {}",
+                jp.getSignature().getDeclaringTypeName(),
+                jp.getSignature().getName(), Arrays.toString(jp.getArgs()));
+        log.debug("___________________________________________________________ \n\n\n");
     }
 
 }
